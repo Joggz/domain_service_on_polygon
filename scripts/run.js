@@ -1,18 +1,18 @@
 const main = async () => {
   const domainContractFactory = await hre.ethers.getContractFactory("Domains");
   // We pass in "ninja" to the constructor when deploying
-  const domainContract = await domainContractFactory.deploy("ninja");
+  const domainContract = await domainContractFactory.deploy("laoye_jnr");
   await domainContract.deployed();
 
   console.log("Contract deployed to:", domainContract.address);
 
   // We're passing in a second variable - value. This is the moneyyyyyyyyyy
-  let txn = await domainContract.register("mortal", {
+  let txn = await domainContract.register("me", {
     value: hre.ethers.utils.parseEther("0.1"),
   });
   await txn.wait();
 
-  const address = await domainContract.getAddress("mortal");
+  const address = await domainContract.getAddress("me");
   console.log("Owner of domain mortal:", address);
 
   const balance = await hre.ethers.provider.getBalance(domainContract.address);
